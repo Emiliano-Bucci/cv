@@ -25,7 +25,23 @@ export default class MyDocument extends Document<Props> {
   render() {
     return (
       <html lang="it">
-        <Head />
+        <Head>
+          <link
+            rel="preconnect"
+            as="script"
+            href="https://queue.simpleanalyticscdn.com"
+          />
+          <script
+            src="https://scripts.simpleanalyticscdn.com/latest.js"
+            async={true}
+            defer={true}
+          />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Varela+Round:wght@400;700&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
         <body>
           <div
             dangerouslySetInnerHTML={{
