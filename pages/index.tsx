@@ -249,7 +249,7 @@ const PdfCV = () => {
         }
 
         @media all and (max-width: 480px) {
-          padding: 2.4rem;
+          padding: 1.6rem;
         }
       `}
     >
@@ -316,6 +316,10 @@ const PdfCV = () => {
                 css={css`
                   font-size: 3.8rem;
                   color: #102a43;
+
+                  @media all and (max-width: 480px) {
+                    font-size: 3.2rem;
+                  }
                 `}
               >
                 Emiliano Bucci
