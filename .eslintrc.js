@@ -2,13 +2,9 @@ module.exports = {
   // Specifies the ESLint parser
   parser: "@typescript-eslint/parser",
   extends: [
-    // Recommended rules from the @typescript-eslint/eslint-plugin
+    "prettier",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    // Disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
-    "prettier/@typescript-eslint",
-    // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors.
-    // This should always be the last configuration in the extends array.
     "plugin:prettier/recommended",
   ],
   plugins: ["react-hooks", "@emotion"],
@@ -57,6 +53,7 @@ module.exports = {
     "react/prop-types": 0,
     "react/no-unescaped-entities": 0,
     "react/display-name": 0,
+    "react/react-in-jsx-scope": 0,
   },
   settings: {
     react: {
