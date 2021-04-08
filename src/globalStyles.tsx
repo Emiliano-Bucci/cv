@@ -152,9 +152,9 @@ export const globalStyles = css`
     font-size: 1.6rem;
     letter-spacing: 0.064rem;
     line-height: 1.4;
-    font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
+    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizelegibility;
     background-color: #fafafa;
