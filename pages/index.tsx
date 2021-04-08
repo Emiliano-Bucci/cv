@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { Img } from "components/Img";
+import { LazyImg } from "components/LazyImg";
 import React from "react";
 import HTML from "public/cv/html5.svg?sprite";
 import CSS from "public/cv/css3.svg?sprite";
@@ -287,17 +287,32 @@ const PdfCV = () => {
               max-width: 340px;
               position: relative;
 
+              @media all and (max-width: 480px) {
+                padding-bottom: 100%;
+                height: 0;
+              }
+
+              & > * {
+                height: 100%;
+              }
+
               .img-wrapper {
                 height: 100%;
 
                 img {
                   border-radius: 8px;
                   overflow: hidden;
+
+                  @media all and (max-width: 480px) {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                  }
                 }
               }
             `}
           >
-            <Img src="cv/profilo-cv.jpg" />
+            <LazyImg src="cv/profilo-cv.jpg" />
           </div>
           <div
             css={css`
