@@ -31,6 +31,8 @@ import ARGENTINAFLAG from "public/cv/argentinaflag.svg?sprite";
 import ITALYFLAG from "public/cv/italyflag.svg?sprite";
 import ENGLISHFLAG from "public/cv/englishflag.svg?sprite";
 import { DefaultLink } from "components/DefaultLink";
+import { useInView } from "react-intersection-observer";
+import { AnimatedWrapper } from "../src/components/AnimatedWrapper/AnimatedWrapper";
 
 const List: React.FC<{ items: string[] }> = ({ items }) => {
   return (
@@ -79,8 +81,15 @@ const Contact: React.FC<{
 };
 
 const Skill: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
+
   return (
-    <div
+    <AnimatedWrapper
+      extRef={ref}
+      triggerAnimation={inView}
+      delay={120}
       css={css`
         display: flex;
         justify-content: center;
@@ -88,10 +97,15 @@ const Skill: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         border-radius: 8px;
         padding: 1.6rem;
         border: 1px solid #b3ecff;
+
+        svg {
+          width: 56px;
+          height: 56px;
+        }
       `}
     >
       {children}
-    </div>
+    </AnimatedWrapper>
   );
 };
 
@@ -102,6 +116,9 @@ const WorkExperience: React.FC<{
   endDate: string;
   description: React.ReactNode;
 }> = ({ title, logo, startDate, endDate, description }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
   const Icon = logo;
 
   return (
@@ -136,7 +153,10 @@ const WorkExperience: React.FC<{
           }
         `}
       >
-        <div
+        <AnimatedWrapper
+          extRef={ref}
+          triggerAnimation={inView}
+          delay={120}
           css={css`
             flex-shrink: 0;
             margin-right: 1.6rem;
@@ -153,7 +173,7 @@ const WorkExperience: React.FC<{
               height: 48px;
             `}
           />
-        </div>
+        </AnimatedWrapper>
         <div
           css={css`
             display: grid;
@@ -192,8 +212,15 @@ const Language: React.FC<{
   icon: JSX.Element;
   title: string;
 }> = ({ title, icon }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
+
   return (
-    <div
+    <AnimatedWrapper
+      triggerAnimation={inView}
+      delay={120}
+      extRef={ref}
       css={css`
         display: grid;
         grid-gap: 0.8rem;
@@ -217,7 +244,7 @@ const Language: React.FC<{
       >
         {title}
       </span>
-    </div>
+    </AnimatedWrapper>
   );
 };
 
@@ -249,7 +276,9 @@ const PdfCV = () => {
         }
 
         @media all and (max-width: 480px) {
-          padding: 1.6rem;
+          padding: 0;
+          border-radius: 0;
+          box-shadow: 0;
         }
       `}
     >
@@ -444,11 +473,6 @@ const PdfCV = () => {
                 grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
                 grid-gap: 1.6rem;
                 margin-top: 2.4rem;
-
-                svg {
-                  width: 56px;
-                  height: 56px;
-                }
               `}
             >
               <Skill>

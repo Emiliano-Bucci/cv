@@ -29,22 +29,10 @@ export const AnimatedWrapper: React.FC<Props> = ({
         will-change: opacity;
         flex: 1;
       `}
+      ref={extRef}
       {...rest}
     >
-      <div
-        data-testid="wrapper-observer"
-        ref={extRef}
-        css={css`
-          display: flex;
-          flex: 1;
-
-          & > * {
-            flex: 1;
-          }
-        `}
-      >
-        {children}
-      </div>
+      {children}
     </animated.div>
   );
 };
