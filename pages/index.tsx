@@ -188,6 +188,7 @@ export default function Page() {
               max-width: 340px;
               position: relative;
               margin: auto;
+              height: 100%;
 
               @media all and (max-width: 480px) {
                 padding-bottom: 100%;
