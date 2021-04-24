@@ -187,28 +187,31 @@ export default function Page() {
             css={css`
               max-width: 340px;
               position: relative;
+              margin: auto;
 
               @media all and (max-width: 480px) {
                 padding-bottom: 100%;
                 height: 0;
+                margin-top: -24px;
+                padding-top: 64px;
               }
 
               & > * {
                 height: 100%;
               }
 
-              .img-wrapper {
-                height: 100%;
+              img {
+                border-radius: 8px;
+                overflow: hidden;
 
-                img {
-                  border-radius: 8px;
-                  overflow: hidden;
-
-                  @media all and (max-width: 480px) {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                  }
+                @media all and (max-width: 480px) {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100vw;
+                  left: 50%;
+                  margin-left: -50vw;
+                  border-radius: 0;
                 }
               }
             `}
