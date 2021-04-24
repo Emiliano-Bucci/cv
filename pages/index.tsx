@@ -31,222 +31,11 @@ import ARGENTINAFLAG from "public/cv/argentinaflag.svg?sprite";
 import ITALYFLAG from "public/cv/italyflag.svg?sprite";
 import ENGLISHFLAG from "public/cv/englishflag.svg?sprite";
 import { DefaultLink } from "components/DefaultLink";
-import { useInView } from "react-intersection-observer";
-import { AnimatedWrapper } from "../src/components/AnimatedWrapper/AnimatedWrapper";
-
-const List: React.FC<{ items: string[] }> = ({ items }) => {
-  return (
-    <ul
-      css={css`
-        margin-top: 0.8rem;
-        list-style: initial;
-        padding-left: 2rem;
-      `}
-    >
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
-  );
-};
-
-const Contact: React.FC<{
-  title: string;
-  content: React.ReactNode;
-}> = ({ title, content }) => {
-  return (
-    <div
-      css={css`
-        display: grid;
-      `}
-    >
-      <span
-        css={css`
-          font-size: 1.4rem;
-          font-weight: 600;
-          color: #102a43;
-        `}
-      >
-        {title}
-      </span>
-      <span
-        css={css`
-          color: #035388;
-        `}
-      >
-        {content}
-      </span>
-    </div>
-  );
-};
-
-const Skill: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-  });
-
-  return (
-    <AnimatedWrapper
-      extRef={ref}
-      triggerAnimation={inView}
-      delay={120}
-      css={css`
-        display: flex;
-        justify-content: center;
-        background-color: #f0f4f8;
-        border-radius: 8px;
-        padding: 1.6rem;
-        border: 1px solid #b3ecff;
-
-        svg {
-          width: 56px;
-          height: 56px;
-        }
-      `}
-    >
-      {children}
-    </AnimatedWrapper>
-  );
-};
-
-const WorkExperience: React.FC<{
-  title: string;
-  logo: string;
-  startDate: string;
-  endDate: string;
-  description: React.ReactNode;
-}> = ({ title, logo, startDate, endDate, description }) => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-  });
-  const Icon = logo;
-
-  return (
-    <div
-      css={css`
-        background-color: #f0f4f8;
-        border-radius: 8px;
-        padding: 1.6rem;
-        border: 1px solid #b3ecff;
-
-        a {
-          display: block;
-          text-decoration: underline;
-          color: #035388;
-
-          :first-of-type {
-            margin-top: 0.8rem;
-          }
-          :last-of-type {
-            margin-bottom: 0.8rem;
-          }
-        }
-      `}
-    >
-      <div
-        css={css`
-          display: flex;
-          align-items: flex-start;
-
-          @media all and (max-width: 480px) {
-            flex-direction: column;
-          }
-        `}
-      >
-        <AnimatedWrapper
-          extRef={ref}
-          triggerAnimation={inView}
-          delay={120}
-          css={css`
-            flex-shrink: 0;
-            margin-right: 1.6rem;
-
-            @media all and (max-width: 480px) {
-              margin: 0;
-              margin-bottom: 1.6rem;
-            }
-          `}
-        >
-          <Icon
-            css={css`
-              width: 48px;
-              height: 48px;
-            `}
-          />
-        </AnimatedWrapper>
-        <div
-          css={css`
-            display: grid;
-          `}
-        >
-          <span
-            css={css`
-              font-weight: 600;
-              font-size: 1.8rem;
-            `}
-          >
-            {title}
-          </span>
-          <div
-            css={css`
-              font-size: 1.4rem;
-              color: #486581;
-            `}
-          >
-            {startDate} - {endDate}
-          </div>
-          <div
-            css={css`
-              margin-top: 1.6rem;
-            `}
-          >
-            {description}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const Language: React.FC<{
-  icon: JSX.Element;
-  title: string;
-}> = ({ title, icon }) => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-  });
-
-  return (
-    <AnimatedWrapper
-      triggerAnimation={inView}
-      delay={120}
-      extRef={ref}
-      css={css`
-        display: grid;
-        grid-gap: 0.8rem;
-        background-color: #f0f4f8;
-        border-radius: 8px;
-        padding: 1.6rem;
-        border: 1px solid #b3ecff;
-
-        svg {
-          width: 40px;
-          height: 40px;
-        }
-      `}
-    >
-      <div>{icon}</div>
-      <span
-        css={css`
-          font-size: 1.4rem;
-          color: #486581;
-        `}
-      >
-        {title}
-      </span>
-    </AnimatedWrapper>
-  );
-};
+import { LanguageCard } from "src/components/LanguageCard";
+import { ContactInfo } from "src/components/ContactInfo";
+import { ItemsList } from "src/components/ItemsList";
+import { SkillCard } from "src/components/SkillCard";
+import { WorkExperienceCard } from "src/components/WorkExperienceCard";
 
 const sectionSubtitleStyles = css`
   display: inline-block;
@@ -255,7 +44,90 @@ const sectionSubtitleStyles = css`
   margin-top: 0.4rem;
 `;
 
-const PdfCV = () => {
+const skills = [
+  {
+    id: "html",
+    Icon: HTML,
+  },
+  {
+    id: "css",
+    Icon: CSS,
+  },
+  {
+    id: "js",
+    Icon: JS,
+  },
+  {
+    id: "ts",
+    Icon: TS,
+  },
+  {
+    id: "react",
+    Icon: REACT,
+  },
+  {
+    id: "nextjs",
+    Icon: NEXTJS,
+  },
+  {
+    id: "jest",
+    Icon: JEST,
+  },
+  {
+    id: "apollo",
+    Icon: APOLLO,
+  },
+  {
+    id: "eslint",
+    Icon: ESLINT,
+  },
+  {
+    id: "vercel",
+    Icon: VERCEL,
+  },
+  {
+    id: "vscode",
+    Icon: VSCODE,
+  },
+  {
+    id: "git",
+    Icon: GIT,
+  },
+  {
+    id: "github",
+    Icon: GITHUB,
+  },
+  {
+    id: "cy",
+    Icon: CY,
+  },
+  {
+    id: "npm",
+    Icon: NPM,
+  },
+  {
+    id: "storybook",
+    Icon: STORYBOOK,
+  },
+  {
+    id: "reactspring",
+    Icon: REACTSPRING,
+  },
+  {
+    id: "nodejs",
+    Icon: NODEJS,
+  },
+  {
+    id: "aws",
+    Icon: AWS,
+  },
+  {
+    id: "jira",
+    Icon: JIRA,
+  },
+];
+
+export default function Page() {
   return (
     <div
       css={css`
@@ -389,11 +261,11 @@ const PdfCV = () => {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
               `}
             >
-              <Contact title="Date of birth" content="13/08/1989" />
-              <Contact title="Nationality" content="Argentina/Italian" />
-              <Contact title="I live in" content="Casei Gerola, Italy" />
-              <Contact title="Phone" content="3478367426" />
-              <Contact
+              <ContactInfo title="Date of birth" content="13/08/1989" />
+              <ContactInfo title="Nationality" content="Argentina/Italian" />
+              <ContactInfo title="I live in" content="Casei Gerola, Italy" />
+              <ContactInfo title="Phone" content="3478367426" />
+              <ContactInfo
                 title="Email"
                 content={
                   <DefaultLink
@@ -475,66 +347,11 @@ const PdfCV = () => {
                 margin-top: 2.4rem;
               `}
             >
-              <Skill>
-                <HTML />
-              </Skill>
-              <Skill>
-                <CSS />
-              </Skill>
-              <Skill>
-                <JS />
-              </Skill>
-              <Skill>
-                <TS />
-              </Skill>
-              <Skill>
-                <REACT />
-              </Skill>
-              <Skill>
-                <NEXTJS />
-              </Skill>
-              <Skill>
-                <JEST />
-              </Skill>
-              <Skill>
-                <APOLLO />
-              </Skill>
-              <Skill>
-                <ESLINT />
-              </Skill>
-              <Skill>
-                <VERCEL />
-              </Skill>
-              <Skill>
-                <VSCODE />
-              </Skill>
-              <Skill>
-                <GIT />
-              </Skill>
-              <Skill>
-                <GITHUB />
-              </Skill>
-              <Skill>
-                <CY />
-              </Skill>
-              <Skill>
-                <NPM />
-              </Skill>
-              <Skill>
-                <STORYBOOK />
-              </Skill>
-              <Skill>
-                <REACTSPRING />
-              </Skill>
-              <Skill>
-                <NODEJS />
-              </Skill>
-              <Skill>
-                <AWS />
-              </Skill>
-              <Skill>
-                <JIRA />
-              </Skill>
+              {skills.map(({ id, Icon }) => (
+                <SkillCard key={id}>
+                  <Icon />
+                </SkillCard>
+              ))}
             </div>
           </section>
           <section
@@ -570,11 +387,11 @@ const PdfCV = () => {
                 grid-gap: 2.4rem;
               `}
             >
-              <WorkExperience
+              <WorkExperienceCard
                 logo={MYN}
                 title="Myntelligence"
                 startDate="March 2020"
-                endDate="Current"
+                endDate="March 2021"
                 description={
                   <>
                     MyVideo was absorbed by Myntelligence company but my work
@@ -582,7 +399,7 @@ const PdfCV = () => {
                     myself with many other Frontend Developers and Designers, as
                     well as we start to work with a more structured Agile
                     process.
-                    <List
+                    <ItemsList
                       items={[
                         "Mentoring and pair programming with junior Frontend developers",
                         "Responsability of implementing from scratch a new styleguide in a vast legacy project",
@@ -597,7 +414,7 @@ const PdfCV = () => {
                 }
               />
 
-              <WorkExperience
+              <WorkExperienceCard
                 logo={MYVIDEO}
                 title="MyVideo (formerly TheOutplay)"
                 startDate="July 2018"
@@ -608,7 +425,7 @@ const PdfCV = () => {
                     worked on the development of the company dashboard (a
                     platform used by the users to visualize the insights and
                     perform actions).
-                    <List
+                    <ItemsList
                       items={[
                         "React & Typescript for the Frontend project",
                         "GraphQL for the backend services (and Apollo for the client)",
@@ -628,7 +445,7 @@ const PdfCV = () => {
                       thousands of websites to deliver Advertising and video
                       Content.
                     </span>
-                    <List
+                    <ItemsList
                       items={[
                         "Frontend project powered by Preact and Redux-Saga",
                         "Video player implementation through <iframe />",
@@ -645,7 +462,7 @@ const PdfCV = () => {
                   </>
                 }
               />
-              <WorkExperience
+              <WorkExperienceCard
                 logo={TALENTGARDEN}
                 title="Codemaster 2018 edition"
                 startDate="March 2018"
@@ -673,7 +490,7 @@ const PdfCV = () => {
             >
               <h2>Side projects</h2>
 
-              <WorkExperience
+              <WorkExperienceCard
                 logo={REACTSPRINGCAROUSEL}
                 title="React spring carousel js"
                 startDate="December 2020"
@@ -683,7 +500,7 @@ const PdfCV = () => {
                     I've also started to dive into the open source world. My
                     first project is a React Carousel Component powered by
                     react-spring.
-                    <List
+                    <ItemsList
                       items={[
                         "Open source library powered by reate-create-library",
                       ]}
@@ -706,7 +523,7 @@ const PdfCV = () => {
                   </>
                 }
               />
-              <WorkExperience
+              <WorkExperienceCard
                 logo={BURGEZ}
                 title="Burgez"
                 startDate="January 2020"
@@ -725,7 +542,7 @@ const PdfCV = () => {
                   </>
                 }
               />
-              <WorkExperience
+              <WorkExperienceCard
                 logo={WILDTREK}
                 title="Wild Trek"
                 startDate="June 2019"
@@ -737,7 +554,7 @@ const PdfCV = () => {
                     and I took care of developing their website from scratch (I
                     took care of Frontend and Backend development and all design
                     aspects).
-                    <List
+                    <ItemsList
                       items={[
                         "Next.js application on the Frontend side (hosted on Vercel)",
                         "Wordpress for the content part",
@@ -825,9 +642,9 @@ const PdfCV = () => {
                 grid-gap: 1.6rem;
               `}
             >
-              <Language title="Spanish (C2)" icon={<ARGENTINAFLAG />} />
-              <Language title="Italian (C2)" icon={<ITALYFLAG />} />
-              <Language title="English (B2)" icon={<ENGLISHFLAG />} />
+              <LanguageCard title="Spanish (C2)" icon={<ARGENTINAFLAG />} />
+              <LanguageCard title="Italian (C2)" icon={<ITALYFLAG />} />
+              <LanguageCard title="English (B2)" icon={<ENGLISHFLAG />} />
             </div>
           </section>
           <section
@@ -844,7 +661,4 @@ const PdfCV = () => {
       </div>
     </div>
   );
-};
-
-const Page = () => <PdfCV />;
-export default Page;
+}

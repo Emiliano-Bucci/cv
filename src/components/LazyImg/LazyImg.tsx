@@ -1,33 +1,31 @@
-import { ImgHTMLAttributes, useState } from "react";
-import { Img } from "components/Img";
-import {
-  AnimatedWrapper,
-  Props as AnimatedWrapperProps,
-} from "components/AnimatedWrapper";
+import { Img, Props as ImageProps } from "components/Img";
 import { useInView } from "react-intersection-observer";
+import { animated, useSpring } from "react-spring";
+import { css } from "@emotion/react";
 
-type Props = ImgHTMLAttributes<HTMLImageElement> & {
-  fallbackUrl?: string;
-  animationProps?: Omit<AnimatedWrapperProps, "children">;
-};
-
-export const LazyImg: React.FC<Props> = ({ src, animationProps, ...rest }) => {
-  const [showImage, setShowImage] = useState(false);
+export function LazyImg({ src, ...rest }: ImageProps) {
+  const [styles, setStyles] = useSpring(() => ({
+    opacity: 0,
+  }));
   const { ref, inView } = useInView({
     triggerOnce: true,
   });
 
   return (
-    <AnimatedWrapper
-      extRef={ref}
-      triggerAnimation={inView && showImage}
-      {...animationProps}
+    <animated.div
+      style={styles}
+      ref={ref}
+      css={css`
+        display: flex;
+        will-change: opacity;
+        flex: 1;
+      `}
     >
       <Img
         {...rest}
         src={inView ? src : ""}
-        onImageLoaded={() => setTimeout(() => setShowImage(true), 0)}
+        onImageLoaded={() => setStyles({ opacity: 1 })}
       />
-    </AnimatedWrapper>
+    </animated.div>
   );
-};
+}

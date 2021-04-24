@@ -24,12 +24,12 @@ export const AnimatedWrapper: React.FC<Props> = ({
   return (
     <animated.div
       style={styles}
+      ref={extRef}
       css={css`
         display: flex;
         will-change: opacity;
         flex: 1;
       `}
-      ref={extRef}
       {...rest}
     >
       {children}
