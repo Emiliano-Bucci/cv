@@ -26,7 +26,6 @@ import AWS from "public/cv/aws.svg?sprite";
 import WILDTREK from "public/cv/wildtrek.svg?sprite";
 import BURGEZ from "public/cv/burgez.svg?sprite";
 import TALENTGARDEN from "public/cv/talentgarden.svg?sprite";
-import REACTSPRINGCAROUSEL from "public/cv/carousel.svg?sprite";
 import ARGENTINAFLAG from "public/cv/argentinaflag.svg?sprite";
 import ITALYFLAG from "public/cv/italyflag.svg?sprite";
 import ENGLISHFLAG from "public/cv/englishflag.svg?sprite";
@@ -495,10 +494,10 @@ export default function Page() {
               <h2>Side projects</h2>
 
               <WorkExperienceCard
-                logo={REACTSPRINGCAROUSEL}
-                title="React spring carousel js"
+                logo={GITHUB}
+                title="React Spring Carousel JS"
                 startDate="December 2020"
-                endDate="January 2021"
+                endDate="current"
                 description={
                   <>
                     I've also started to dive into the open source world. My
@@ -506,13 +505,43 @@ export default function Page() {
                     react-spring.
                     <ItemsList
                       items={[
-                        "Open source library powered by reate-create-library",
+                        "Open source library powered by react-spring and react-use-gesture",
                       ]}
                     />
                     <DefaultLink href="https://github.com/Emiliano-Bucci/react-spring-carousel-js">
                       Github repository
                     </DefaultLink>
                     <DefaultLink href="https://react-spring-carousel-js.emilianobucci.com/">
+                      Official documentation
+                    </DefaultLink>
+                    <span
+                      css={css`
+                        font-size: 1.48rem;
+                        color: #243b53;
+                      `}
+                    >
+                      PS: The Official documentation website is a custom Next.js
+                      application!
+                    </span>
+                  </>
+                }
+              />
+              <WorkExperienceCard
+                logo={GITHUB}
+                title="React Spring Dialog"
+                startDate="April 2021"
+                endDate="current"
+                description={
+                  <>
+                    This is my second Open Source library; a simple and powerful
+                    React Dialog component.
+                    <ItemsList
+                      items={["Open source library powered by react-spring"]}
+                    />
+                    <DefaultLink href="https://github.com/Emiliano-Bucci/react-spring-dialog">
+                      Github repository
+                    </DefaultLink>
+                    <DefaultLink href="https://react-spring-dialog.emilianobucci.com">
                       Official documentation
                     </DefaultLink>
                     <span
